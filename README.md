@@ -16,8 +16,8 @@ go get -u github.com/tonie-ng/go-dotenv
 ```
 
 ## Usage
-There are various ways tp use this package.
-1. Using the default values for the filename and logger
+There are various ways to use this package.
+1. Using the default values for the filename and logger \n
 *please ensure to have a `.env` file at the root directory of your project
 
 ```go
@@ -70,5 +70,66 @@ func main() {
 	for _, v := range envVars {
 		fmt.Println(v)
 	}
+}
+```
+
+2. Providing a value for either the logger or the filename. (If one is provided the other is assigned to the default.)
+```go
+package main
+
+import (
+	"log"
+	"os"
+    "fmt"
+
+	"github.com/tonie-ng/go-dotenv"
+)
+
+func main() {
+
+	dotenv.Config("env")
+	/*
+	We proviide a string here and this is assigned to the filename while the logger uses the dafault.
+	To assign the logger to a value instead, we do:
+	*/
+
+	logger := log.New(os.Stdout, "Example logger", log.LstdFlags)
+
+	dotenv.Config(logger)
+
+	
+	// You can also assign logger to nil by doing. This indicates that you dont want a logger.
+	dotenv.Config(nil)
+
+    fmt.Println(os.Getenv("MY_ENV_KEY"))
+    // prints the value of the MY_ENV_KEY provided in the env file
+}
+```
+
+3. Providing a logger and a filename.
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"os"
+
+	"github.com/tonie-ng/go-dotenv"
+)
+
+func main() {
+
+	filename := "sample.env"
+
+	logger := log.New(os.Stdout, "Example logger", log.LstdFlags)
+
+	dotenv.Config(filename, logger)
+
+	// You can also assign logger to nil by doing. This indicates that you dont want a logger.
+	logger = nil
+	dotenv.Config(filename, logger)
+
+	fmt.Println(os.Getenv("MY_ENV_KEY"))
 }
 ```

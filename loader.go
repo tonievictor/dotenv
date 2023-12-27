@@ -78,21 +78,27 @@ func Config(params ...interface{}) (map[string]string, error) {
 		} else if v, ok := params[0].(*log.Logger); ok {
 			logger = v
 			filename = ".env"
+		} else if params[0] == nil {
+			logger = nil
+			filename = ".env"
 		} else {
-			return nil, fmt.Errorf("%v represents a filename and must be a string", v)
+			return nil, fmt.Errorf("Invalid parameters. Please use this format: Config(string)\n or Config(*log.Logger)\n or Config(nil)")
 		}
 	}
 
 	if len(params) == 2 {
-		if v, ok := params[0].(string); ok {
-			filename = v
-		} else {
+		if v, ok := params[0].(string); !ok {
 			return nil, fmt.Errorf("%v represents a filename and must be a string", v)
+		} else {
+			filename = v
 		}
-		if v, ok := params[1].(*log.Logger); ok {
+
+		if params[1] == nil {
+			logger = nil
+		} else if v, ok := params[1].(*log.Logger); ok {
 			logger = v
 		} else {
-			return nil, fmt.Errorf("unexpected type for the first parameter: %T", v)
+			return nil, fmt.Errorf("%v represents a logger and must be of type *log.Logger", v)
 		}
 	}
 
@@ -104,14 +110,18 @@ func Config(params ...interface{}) (map[string]string, error) {
 	envVars, err := load(filename)
 
 	if err != nil {
-		logger.Println(err)
+		if logger != nil {
+			logger.Println(err)
+		}
 		return nil, err
 	}
 
 	for key, value := range envVars {
 		err = os.Setenv(key, value)
 		if err != nil { 
-			logger.Println(err)
+			if logger != nil {
+				logger.Println(err)
+			}
 			reterr = err
 			break
 		}
