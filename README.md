@@ -18,13 +18,16 @@ go get -u github.com/tonie-ng/go-dotenv
 ## Usage
 There are various ways tp use this package.
 1. Using the default values for the filename and logger
+*please ensure to have a `.env` file at the root directory of your project
 
 ```go
 package main
 
 import (
-    "fmt"
-    "github.com/tonie-ng/go-dotenv"
+	"fmt"
+	"os"
+
+	"github.com/tonie-ng/go-dotenv"
 )
 
 func main() {
@@ -32,7 +35,7 @@ func main() {
 
     envVariable := os.Getenv("MY_ENV_KEY")
     /*
-    "MY_ENV_KEY" represents an env eky taht was provided in the env file
+    "MY_ENV_KEY" represents an env eky that was provided in the env file
     ie., MY_ENV_KEY=value
     */
     
