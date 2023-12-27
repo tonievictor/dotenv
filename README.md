@@ -78,9 +78,9 @@ func main() {
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
-    "fmt"
 
 	"github.com/tonie-ng/go-dotenv"
 )
@@ -101,8 +101,8 @@ func main() {
 	// You can also assign logger to nil by doing. This indicates that you dont want a logger.
 	dotenv.Config(nil)
 
-    fmt.Println(os.Getenv("MY_ENV_KEY"))
-    // prints the value of the MY_ENV_KEY provided in the env file
+	fmt.Println(os.Getenv("MY_ENV_KEY"))
+  // prints the value of the MY_ENV_KEY provided in the env file
 }
 ```
 
@@ -133,3 +133,6 @@ func main() {
 	fmt.Println(os.Getenv("MY_ENV_KEY"))
 }
 ```
+
+## Contibutions
+Contributions to this project are welcome, plese refer to the [contibution](https://github.com/tonie-ng/go-dotenv/blob/main/CONTRIBUTING.md) guide.
