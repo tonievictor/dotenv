@@ -33,6 +33,8 @@ import (
 func main() {
     dotenv.Config()
 
+    // This is equivalent to _, _ := dotenv.Config()
+
     envVariable := os.Getenv("MY_ENV_KEY")
     /*
     "MY_ENV_KEY" represents an env eky that was provided in the env file
@@ -41,5 +43,32 @@ func main() {
     
     fmt.Println(envVariable)
     // This prints the value assigned to the MY_ENV_KEY
+}
+```
+or
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/tonie-ng/go-dotenv"
+)
+
+func main() {
+
+	envVars, err := dotenv.Config()
+
+	/*
+		dotenv.Config() returns a map of all the environment variables provided in the .env file and an err if any.
+		These can be ignored by using the _ operator.
+	*/
+	if err != nil {
+		fmt.Println(err)
+	}
+    
+	for _, v := range envVars {
+		fmt.Println(v)
+	}
 }
 ```
