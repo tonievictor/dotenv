@@ -32,18 +32,14 @@ import (
 )
 
 func main() {
+    
+    // loads the env variables using the defaults while ignoring the return values.
     dotenv.Config()
 
-    // This is equivalent to _, _ := dotenv.Config()
-
     envVariable := os.Getenv("MY_ENV_KEY")
-    /*
-    "MY_ENV_KEY" represents an env eky that was provided in the env file
-    ie., MY_ENV_KEY=value
-    */
     
-    fmt.Println(envVariable)
     // This prints the value assigned to the MY_ENV_KEY
+    fmt.Println(envVariable)
 }
 ```
 or
@@ -58,12 +54,10 @@ import (
 
 func main() {
 
+
+    // dotenv.Config() returns a map of all the environment variables provided in the .env file and an err if any.
 	envVars, err := dotenv.Config()
 
-	/*
-		dotenv.Config() returns a map of all the environment variables provided in the .env file and an err if any.
-		These can be ignored by using the _ operator.
-	*/
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -88,12 +82,12 @@ import (
 
 func main() {
 
+	
+	// We provide a string here and this is assigned to the filename while the logger uses the dafault.
 	dotenv.Config("env")
-	/*
-	We proviide a string here and this is assigned to the filename while the logger uses the dafault.
-	To assign the logger to a value instead, we do:
-	*/
 
+
+	// To assign the logger to a value instead, we do:
 	logger := log.New(os.Stdout, "Example logger", log.LstdFlags)
 
 	dotenv.Config(logger)
@@ -102,8 +96,8 @@ func main() {
 	// You can also assign logger to nil by doing. This indicates that you dont want a logger.
 	dotenv.Config(nil)
 
+    // prints the value of the MY_ENV_KEY provided in the env file
 	fmt.Println(os.Getenv("MY_ENV_KEY"))
-  // prints the value of the MY_ENV_KEY provided in the env file
 }
 ```
 
@@ -127,9 +121,8 @@ func main() {
 
 	dotenv.Config(filename, logger)
 
-	// You can also assign logger to nil by doing. This indicates that you dont want a logger.
-	logger = nil
-	dotenv.Config(filename, logger)
+	// You can also assign logger to nil by doing. This indicates that you don't want a logger.
+	dotenv.Config(filename, nil)
 
 	fmt.Println(os.Getenv("MY_ENV_KEY"))
 }
