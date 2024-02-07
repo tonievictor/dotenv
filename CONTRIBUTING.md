@@ -12,6 +12,7 @@ git checkout -b <feature-or-fix-name>
 ```
 4. **Make Changes**: Implement your fixture or fix and make sure the tests pass.
 5. **Run Tests**: Ensure that your changes pass the existing tests. If you added new features, consider adding tests.
+> There's also an opportunity to further improve and expand the existing test suite.
 ```bash
 // Add your tests in this directory ./tests/. Please, ensure to follow existing patterns where possible.
 
