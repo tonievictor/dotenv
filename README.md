@@ -132,7 +132,8 @@ func main() {
 Contributions to this project are welcome, plese refer to the [contibution](https://github.com/tonie-ng/go-dotenv/blob/main/CONTRIBUTING.md) guide.
 
 ## TODO
-[ ] - Add support for string recognition in env files. ie
+- [x] Add support for string recognition in env files. ie
 ```txt
 TEST_ENV="envvarwithstrings" should output => envvarwithstrings but without the double quotes
 ```
+> Note: I should probably raise issues instead of updating this TODO list :/.
