@@ -42,9 +42,13 @@ func load(filename string) (map[string]string, error) {
 			}
 
 			if len(valuesize) > 1 {
-				if string(valuesize[1][0]) == "#" || string(valuesize[1][:2]) == "//"{
+				if string(valuesize[1][0]) == "#" || string(valuesize[1][:2]) == "//" {
 					value = valuesize[0]
 				}
+			}
+
+			if value[0] == '"' && value[len(value)-1] == '"' {
+				value = strings.Trim(value, "\"")
 			}
 
 			envVars[key] = value
@@ -60,10 +64,9 @@ func load(filename string) (map[string]string, error) {
 }
 
 func Config(params ...interface{}) (map[string]string, error) {
-
 	var (
-		reterr error
-		logger *log.Logger
+		reterr   error
+		logger   *log.Logger
 		filename string
 	)
 
@@ -73,7 +76,7 @@ func Config(params ...interface{}) (map[string]string, error) {
 
 	if len(params) == 1 {
 		if v, ok := params[0].(string); ok {
-			filename = v 
+			filename = v
 			log.New(os.Stderr, "Dotenv logger", log.LstdFlags)
 		} else if v, ok := params[0].(*log.Logger); ok {
 			logger = v
@@ -106,9 +109,8 @@ func Config(params ...interface{}) (map[string]string, error) {
 		filename = ".env"
 		logger = log.New(os.Stderr, "Dotenv logger", log.LstdFlags)
 	}
-	
-	envVars, err := load(filename)
 
+	envVars, err := load(filename)
 	if err != nil {
 		if logger != nil {
 			logger.Println(err)
@@ -118,7 +120,7 @@ func Config(params ...interface{}) (map[string]string, error) {
 
 	for key, value := range envVars {
 		err = os.Setenv(key, value)
-		if err != nil { 
+		if err != nil {
 			if logger != nil {
 				logger.Println(err)
 			}
