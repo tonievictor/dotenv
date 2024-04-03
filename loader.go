@@ -77,7 +77,7 @@ func Config(params ...interface{}) (map[string]string, error) {
 	if len(params) == 1 {
 		if v, ok := params[0].(string); ok {
 			filename = v
-			log.New(os.Stderr, "Dotenv logger", log.LstdFlags)
+			log.New(os.Stderr, "dotenv:", log.LstdFlags)
 		} else if v, ok := params[0].(*log.Logger); ok {
 			logger = v
 			filename = ".env"
