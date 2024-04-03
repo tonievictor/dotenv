@@ -12,7 +12,7 @@ git checkout -b <feature-or-fix-name>
 ```
 4. **Make Changes**: Implement your fixture or fix and make sure the tests pass.
 5. **Run Tests**: Ensure that your changes pass the existing tests. If you added new features, consider adding tests.
-> There's also an opportunity to further improve and expand the existing test suite.
+> 
 ```bash
 // Add your tests in this directory ./tests/. Please, ensure to follow existing patterns where possible.
 
@@ -22,7 +22,7 @@ go test ./tests/
 ```
 git add .
 git commit -m "Add feature or fix"
-git push origin feature-or-fix-name
+git push -u origin feature-or-fix-name
 ```
 7. **Create a Pull Request**: Open a pull request on the original repository with a clear title and description of your changes.
 
