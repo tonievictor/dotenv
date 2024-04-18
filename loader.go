@@ -22,9 +22,9 @@ func load(filename string) (map[string]string, error) {
 
 	for scanner.Scan() {
 		line := scanner.Text()
-		tokens := strings.Split(line, "=")
+		tokens := strings.SplitN(line, "=", 2)
 
-		if len(tokens) != 2 {
+		if len(tokens) != 2 || len(tokens[0]) == 0 || len(tokens[1]) == 0 {
 			continue
 		} else if string(tokens[0][0]) == "#" || string(tokens[0][0]) == "//" {
 			continue
