@@ -11,7 +11,10 @@ func TestComments(t *testing.T) {
 		filename := filenames["comment"]
 
 		got, _ := dotenv.Config(filename, logger)
-		want := map[string]string{"KEY1": "VALUE1"}
+		want := map[string]string{
+			"KEY1":           "VALUE1",
+			"DB_CONN_STRING": "postgres://postgres:passw@localhost:5432/dbname?sslmode=disable",
+		}
 
 		reflectDeepEqual(t, got, want)
 	})
@@ -21,8 +24,9 @@ func TestComments(t *testing.T) {
 
 		got, _ := dotenv.Config(filename, logger)
 		want := map[string]string{
-			"KEY1": "VALUE1",
-			"KEY2": "VALUE2",
+			"KEY1":           "VALUE1",
+			"KEY2":           "VALUE2",
+			"DB_CONN_STRING": "postgres://postgres:passw@localhost:5432/dbname?sslmode=disable",
 		}
 
 		reflectDeepEqual(t, got, want)
