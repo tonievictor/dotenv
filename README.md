@@ -4,7 +4,7 @@
 
 **Go Dotenv** is a lightweight Go package designed to simplify the configuration of your Go applications by loading environment variables from a `.env` file (or any file of your choice). It provides a flexible structure, allowing you to customize the configuration process based on your application's needs.
 
-**Note:** The default `env` file is a ".env" file at the root of the project and the default `logger` writes to `os.std.Out`
+**Note:** The default `env` file is a ".env" file at the root of the project and the default `logger` writes to `os.Stdout`
 
 ## Features:
 - **Simple Configuration:** Easily load environment variables from a specified .env file or use default values.
@@ -19,7 +19,7 @@ go get -u github.com/tonie-ng/go-dotenv
 
 ## Usage
 There are various ways to use this package.
-1. Using the default values for the filename and logger. Please ensure to have a `.env` file at the root directory of your project
+1. Using the default values for the filename and logger.
 
 ```go
 package main
@@ -129,11 +129,4 @@ func main() {
 ```
 
 ## Contibutions
-Contributions to this project are welcome, plese refer to the [contibution](https://github.com/tonie-ng/go-dotenv/blob/main/CONTRIBUTING.md) guide.
-
-## TODO
-- [x] Add support for string recognition in env files. ie
-```txt
-TEST_ENV="envvarwithstrings" should output => envvarwithstrings but without the double quotes
-```
-> Note: I should probably raise issues instead of updating this TODO list :/.
+Contributions to this project are welcome, please refer to the [contribution](https://github.com/tonie-ng/go-dotenv/blob/main/CONTRIBUTING.md) guide.
