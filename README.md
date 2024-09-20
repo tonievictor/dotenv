@@ -1,16 +1,7 @@
 # Go Dotenv
-
-## Description:
-
-**Go Dotenv** is a lightweight Go package designed to simplify the configuration of your Go applications by loading environment variables from a `.env` file (or any file of your choice). It provides a flexible structure, allowing you to customize the configuration process based on your application's needs.
+A lightweight Go package designed to simplify the configuration of your Go applications by loading environment variables from a `.env` file (or any file of your choice)
 
 **Note:** The default `env` file is a ".env" file at the root of the project and the default `logger` writes to `os.Stdout`
-
-## Features:
-- **Simple Configuration:** Easily load environment variables from a specified .env file or use default values.
-- **Logger Integration:** Seamlessly integrate with your existing logging infrastructure by accepting a `*log.Logger` as a parameter.
-- **Error Handling:** Provides clear error messages for quick debugging.
-- **Customization:** Customize the configuration process by specifying a filename, logger, or both, depending on your application requirements.
 
 ## Installation
 ```bash
@@ -130,3 +121,6 @@ func main() {
 
 ## Contibutions
 Contributions to this project are welcome, please refer to the [contribution](https://github.com/tonie-ng/go-dotenv/blob/main/CONTRIBUTING.md) guide.
+
+## Contributors
+[Tonie Victor](https://tonie.me) - Author
