@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/tonie-ng/go-dotenv"
+	"github.com/tonievictor/dotenv"
 )
 
 func TestFile(t *testing.T) {

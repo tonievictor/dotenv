@@ -1,11 +1,11 @@
-# Go Dotenv
+# Dotenv
 A lightweight Go package designed to simplify the configuration of your Go applications by loading environment variables from a `.env` file (or any file of your choice)
 
 **Note:** The default `env` file is a ".env" file at the root of the project and the default `logger` writes to `os.Stdout`
 
 ## Installation
 ```bash
-go get -u github.com/tonie-ng/go-dotenv
+go get -u github.com/tonievictor/dotenv
 ```
 
 ## Usage
@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/tonie-ng/go-dotenv"
+	"github.com/tonievictor/dotenv"
 )
 
 func main() {
@@ -40,7 +40,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/tonie-ng/go-dotenv"
+	"github.com/tonievictor/dotenv"
 )
 
 func main() {
@@ -68,7 +68,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/tonie-ng/go-dotenv"
+	"github.com/tonievictor/dotenv"
 )
 
 func main() {
@@ -101,7 +101,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/tonie-ng/go-dotenv"
+	"github.com/tonievictor/dotenv"
 )
 
 func main() {
@@ -120,7 +120,7 @@ func main() {
 ```
 
 ## Contibutions
-Contributions to this project are welcome, please refer to the [contribution](https://github.com/tonie-ng/go-dotenv/blob/main/CONTRIBUTING.md) guide.
+Contributions to this project are welcome, please refer to the [contribution](https://github.com/tonievictor/dotenv/blob/main/CONTRIBUTING.md) guide.
 
 ## Contributors
 [Tonie Victor](https://tonie.me) - Author

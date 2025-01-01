@@ -3,7 +3,7 @@ package dotenvtest
 import (
 	"reflect"
 	"testing"
-	"github.com/tonie-ng/go-dotenv"
+	"github.com/tonievictor/dotenv"
 )
 
 

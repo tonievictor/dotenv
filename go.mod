@@ -1,3 +1,3 @@
-module github.com/tonie-ng/go-dotenv
+module github.com/tonievictor/dotenv
 
-go 1.21.5
+go 1.23.0

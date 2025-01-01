@@ -3,7 +3,7 @@ package dotenvtest
 import (
 	"testing"
 
-	"github.com/tonie-ng/go-dotenv"
+	"github.com/tonievictor/dotenv"
 )
 
 func TestLogger(t *testing.T) {
