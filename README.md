@@ -46,7 +46,7 @@ import (
 func main() {
 
 
-    // dotenv.Config() returns a map of all the environment variables provided in the .env file and an err if any.
+    // dotenv.Config() returns a map of all the environment variables provided in the .env file or an err.
 	envVars, err := dotenv.Config()
 
 	if err != nil {
@@ -84,7 +84,7 @@ func main() {
 	dotenv.Config(logger)
 
 	
-	// You can also assign logger to nil by doing. This indicates that you dont want a logger.
+	// You can also assign logger to nil, this indicates that you don't want a logger.
 	dotenv.Config(nil)
 
     // prints the value of the MY_ENV_KEY provided in the env file
@@ -111,9 +111,6 @@ func main() {
 	logger := log.New(os.Stdout, "Example logger", log.LstdFlags)
 
 	dotenv.Config(filename, logger)
-
-	// You can also assign logger to nil by doing. This indicates that you don't want a logger.
-	dotenv.Config(filename, nil)
 
 	fmt.Println(os.Getenv("MY_ENV_KEY"))
 }
