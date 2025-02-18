@@ -119,8 +119,5 @@ func main() {
 }
 ```
 
-## Contibutions
-Contributions to this project are welcome, please refer to the [contribution](https://github.com/tonievictor/dotenv/blob/main/CONTRIBUTING.md) guide.
-
 ## Contributors
 [Tonie Victor](https://tonie.me) - Author
