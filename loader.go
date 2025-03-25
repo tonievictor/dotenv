@@ -2,7 +2,6 @@ package dotenv
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -63,71 +62,63 @@ func load(filename string) (map[string]string, error) {
 	return envVars, nil
 }
 
-func Config(params ...interface{}) (map[string]string, error) {
-	var (
-		reterr   error
-		logger   *log.Logger
-		filename string
-	)
+type options struct {
+	filename string
+	logger   *log.Logger
+}
 
-	if len(params) > 2 {
-		return nil, fmt.Errorf("Config accepts up to two parameters ie Config(string, *log.Logger)")
+type Option interface {
+	apply(*options)
+}
+
+type filenameOption string
+
+func (f filenameOption) apply(opts *options) {
+	opts.filename = string(f)
+}
+
+func WithFilename(f string) Option {
+	return filenameOption(f)
+}
+
+type loggerOption struct {
+	Logger *log.Logger
+}
+
+func (l loggerOption) apply(opts *options) {
+	opts.logger = l.Logger
+}
+
+func WithLogger(l *log.Logger) Option {
+	return loggerOption{Logger: l}
+}
+
+func Config(params ...Option) (map[string]string, error) {
+	opts := options{
+		filename: ".env",
+		logger:   log.New(os.Stderr, "dotenv:", log.LstdFlags),
 	}
 
-	if len(params) == 1 {
-		if v, ok := params[0].(string); ok {
-			filename = v
-			log.New(os.Stderr, "dotenv:", log.LstdFlags)
-		} else if v, ok := params[0].(*log.Logger); ok {
-			logger = v
-			filename = ".env"
-		} else if params[0] == nil {
-			logger = nil
-			filename = ".env"
-		} else {
-			return nil, fmt.Errorf("Invalid parameters. Please use this format: Config(string)\n or Config(*log.Logger)\n or Config(nil)")
-		}
+	for _, val := range params {
+		val.apply(&opts)
 	}
 
-	if len(params) == 2 {
-		if v, ok := params[0].(string); !ok {
-			return nil, fmt.Errorf("%v represents a filename and must be a string", v)
-		} else {
-			filename = v
-		}
-
-		if params[1] == nil {
-			logger = nil
-		} else if v, ok := params[1].(*log.Logger); ok {
-			logger = v
-		} else {
-			return nil, fmt.Errorf("%v represents a logger and must be of type *log.Logger", v)
-		}
-	}
-
-	if len(params) == 0 {
-		filename = ".env"
-		logger = log.New(os.Stderr, "dotenv:", log.LstdFlags)
-	}
-
-	envVars, err := load(filename)
+	envVars, err := load(opts.filename)
 	if err != nil {
-		if logger != nil {
-			logger.Println(err)
+		if opts.logger != nil {
+			opts.logger.Println(err)
 		}
 		return nil, err
 	}
-
 	for key, value := range envVars {
 		err = os.Setenv(key, value)
 		if err != nil {
-			if logger != nil {
-				logger.Println(err)
+			if opts.logger != nil {
+				opts.logger.Println(err)
 			}
-			reterr = err
-			break
+			return nil, err
 		}
 	}
 
-	return envVars, reterr
+	return envVars, nil
 }

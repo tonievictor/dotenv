@@ -10,9 +10,9 @@ import (
 
 func TestFile(t *testing.T) {
 	t.Run("Test valid file", func(t *testing.T) {
-		filename := filenames["valid"]
+		filename := dotenv.WithFilename(filenames["valid"])
 
-		got, _ := dotenv.Config(filename, logger)
+		got, _ := dotenv.Config(filename, dotenv.WithLogger(logger))
 		want := map[string]string{
 			"KEY1":           "VALUE1",
 			"KEY2":           "VALUE2",
@@ -23,9 +23,9 @@ func TestFile(t *testing.T) {
 	})
 
 	t.Run("Test nonexistent file", func(t *testing.T) {
-		filename := filenames["nonexistent"]
+		filename := dotenv.WithFilename(filenames["nonexistent"])
 
-		dotenv.Config(filename, logger)
+		dotenv.Config(filename, dotenv.WithLogger(logger))
 		err := fmt.Sprintf("open %v: no such file or directory", filename)
 
 		if !strings.Contains(logOutput.String(), err) {
@@ -34,9 +34,9 @@ func TestFile(t *testing.T) {
 	})
 
 	t.Run("Test empty file", func(t *testing.T) {
-		filename := filenames["empty"]
+		filename := dotenv.WithFilename(filenames["empty"])
 
-		got, _ := dotenv.Config(filename, logger)
+		got, _ := dotenv.Config(filename, dotenv.WithLogger(logger))
 
 		if len(got) != 0 {
 			t.Errorf("Expected an empty map, got %v", got)
