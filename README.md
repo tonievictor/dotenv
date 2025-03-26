@@ -33,88 +33,35 @@ func main() {
     fmt.Println(envVariable)
 }
 ```
-or
+2. You can also provide an env file and a logger.
 ```go
 package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/tonievictor/dotenv"
 )
 
 func main() {
+    filename := dotenv.WithFilename("env file")
+    logger := log.New(os.Stdout, "Example logger", log.LstdFlags)
 
+	dotenv.Config(filename, dotenv.WithLogger(logger))
+    // you can also choose to provide just the filename or the logger
+    // and use the default for the other.
+	// dotenv.Config(filename)
+    // or 
+	// dotenv.Config(dotenv.WithLogger(logger))
 
-    // dotenv.Config() returns a map of all the environment variables provided in the .env file or an err.
-	envVars, err := dotenv.Config()
-
-	if err != nil {
-		fmt.Println(err)
-	}
+    envVariable := os.Getenv("MY_ENV_KEY")
     
-	for _, v := range envVars {
-		fmt.Println(v)
-	}
+    // This prints the value assigned to the MY_ENV_KEY
+    fmt.Println(envVariable)
 }
 ```
-
-2. Providing a value for either the logger or the filename. (If one is provided the other is assigned to the default.)
-```go
-package main
-
-import (
-	"fmt"
-	"log"
-	"os"
-
-	"github.com/tonievictor/dotenv"
-)
-
-func main() {
-
-	
-	// We provide a string here and this is assigned to the filename while the logger uses the dafault.
-	dotenv.Config("env")
-
-
-	// To assign the logger to a value instead, we do:
-	logger := log.New(os.Stdout, "Example logger", log.LstdFlags)
-
-	dotenv.Config(logger)
-
-	
-	// You can also assign logger to nil, this indicates that you don't want a logger.
-	dotenv.Config(nil)
-
-    // prints the value of the MY_ENV_KEY provided in the env file
-	fmt.Println(os.Getenv("MY_ENV_KEY"))
-}
-```
-
-3. Providing a logger and a filename.
-```go
-package main
-
-import (
-	"fmt"
-	"log"
-	"os"
-
-	"github.com/tonievictor/dotenv"
-)
-
-func main() {
-
-	filename := "sample.env"
-
-	logger := log.New(os.Stdout, "Example logger", log.LstdFlags)
-
-	dotenv.Config(filename, logger)
-
-	fmt.Println(os.Getenv("MY_ENV_KEY"))
-}
-```
+> Note: `dotenv.Config()` returns a map of the environment variables and an error
 
 ## Contributors
 [Tonie Victor](https://tonie.me) - Author
