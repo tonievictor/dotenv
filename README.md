@@ -48,12 +48,12 @@ func main() {
     filename := dotenv.WithFilename("env file")
     logger := log.New(os.Stdout, "Example logger", log.LstdFlags)
 
-	dotenv.Config(filename, dotenv.WithLogger(logger))
+    dotenv.Config(filename, dotenv.WithLogger(logger))
     // you can also choose to provide just the filename or the logger
     // and use the default for the other.
-	// dotenv.Config(filename)
-    // or 
-	// dotenv.Config(dotenv.WithLogger(logger))
+    // dotenv.Config(filename)
+    // or
+    // dotenv.Config(dotenv.WithLogger(logger))
 
     envVariable := os.Getenv("MY_ENV_KEY")
     
